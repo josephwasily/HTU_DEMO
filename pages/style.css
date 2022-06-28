@@ -1,0 +1,39 @@
+#pageheader {
+    background-color: red;
+
+}
+.headings {
+    background-color: blue;
+
+}
+.paragraph {
+    display: inline;
+}
+
+ li > a {
+    background-color: violet;
+} 
+ul > * {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+/* h1 ~ .paragraph.headings {
+    display: none;
+} */
+
+span,h5{
+    background-color: brown;
+}
+.headings.paragraph {
+    background-color: black;
+}
+span + a {
+    background-color: black;
+}
+
+ul:hover {
+    background-color: blue;
+}
+
+input:focus {
+    border: 10px solid red;
+}

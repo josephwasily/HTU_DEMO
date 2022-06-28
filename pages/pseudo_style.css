@@ -1,0 +1,54 @@
+/* 
+
+
+a[href="org"] {
+    background-color: aquamarine;
+    display: inline-block;
+}
+[style]{
+    background-color: aqua;
+}
+
+
+ul > li:nth-child(odd) {
+    color: brown;
+}
+ul.firstul li:not(.dontmess){
+    background-color: red;
+}
+ */
+/* 
+a:active {
+    color: black;
+}
+a:visited {
+    color: black;
+}
+}
+a:link {
+    color: black;
+}
+ */
+
+ p::after {
+     content:''
+
+ }
+ 
+ p,div::first-letter {
+    color:red;
+    text-transform: uppercase;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+[data-tooltip] {
+    position: relative;
+}
+[data-tooltip]:hover::after{
+    content: attr(data-tooltip);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: gray;
+}

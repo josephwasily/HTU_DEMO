@@ -1,0 +1,45 @@
+.parent {
+    height: 3000px;
+    width: 500px;
+    background-color: yellow;
+    /* position: relative; */
+  
+
+}
+.box-1 {
+    height: 100px;
+    width: 100px;
+    position: relative;
+    background-color: red;
+    /* z-index: 99; */
+
+}
+.box-2 {
+    height: 100px;
+    width: 100px;
+    background-color: black;
+    position: sticky;
+    top:10px;
+    /* position: absolute;
+    top:50px;
+    left:0;
+    z-index: 9999999; */
+    
+}
+.box-3 {
+    height: 100px;
+    width: 100px;
+    background-color: blue;
+    /* position: relative;
+    bottom: -100px; */
+}
+
+.box-4 {
+    height: 100px;
+    width: 100px;
+    background-color: purple;
+    /* position: relative;
+    bottom: -100px; */
+    position: sticky;
+    top:5px;
+}

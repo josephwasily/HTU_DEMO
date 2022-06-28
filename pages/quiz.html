@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        label{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <form action="https://www.w3schools.com/action_page.php" method="post" target="_blank">
+        <label for="name">Full name<sup>*</sup>:</label>
+        <input type="text" id="name" name="name" placeholder="FirstName LastName">
+        <label for="email">Email address<sup>*</sup>:</label>
+        <input type="email" id="email" name="email" placeholder="EMAIL_ADDRESS">
+        <label for="tour_package">Select Tour Pacage<sup>*</sup>:</label>
+        <select name="tour_package" id="tour_package">
+            <option value="1">Option 1</option>
+            <option value="2">Option 2</option>
+            <option value="3">Option 3</option>
+        </select>
+        <label for="date">Arrival date<sup>*</sup>:</label>
+        <input type="date" name="date" id="date">
+        <label for="person_num">Number of persons<sup>*</sup>:</label>
+        <input type="text" name="person_num" id="person_num" placeholder="UNKNOWN_TYPE">
+        <p>What would you want to avail?<sup>*</sup></p>
+        <label for="ans1">
+            Boarding
+            <input type="checkbox" name="question" id="ans1">
+        </label>
+        <label for="ans2">
+            Fooding
+            <input type="checkbox" name="question" id="ans2">
+        </label>
+        <label for="ans3">
+            Sight seeing
+            <input type="checkbox" name="question" id="ans3">
+        </label>
+        <label for="coupon">Discount Coupon code:</label>
+        <input type="text" name="coupon" id="coupon" placeholder="UNKNOWN_TYPE">
+        <p>Terms and conditions<sup>*</sup></p>
+        <label for="agree">
+            <input type="radio" name="terms" id="agree">
+            I agree
+        </label>
+        <label for="disagree">
+            <input type="radio" name="terms" id="disagree">
+            I disagree
+        </label>
+
+        <label for="disagree"></label>
+        <input type="radio" name="terms" id="disagree">
+        
+        <input type="Submit" value="Complete reservation">
+    </form>
+</body>
+</html>

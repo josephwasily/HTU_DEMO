@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Html form</title>
+</head>
+<body>
+    <h1>Contact Us</h1>
+    <form method="post" action="https://www.w3schools.com/action_page.php">
+        <!--Personal information-->
+        <fieldset>
+            <legend>Personal Information</legend>
+        <label for="name">Name</label>
+        <input id="name" required name="name" type="text" 
+        placeholder="Full Name">
+        <br>
+        <label for="age">Age</label>
+        <input id="age" type="number" 
+        min="1" max="120" step="5" name="age" placeholder="enter your age">
+        <br>
+        <label for="height">Height</label>
+        <input id="height" name="height" placeholder="height">
+        <br>
+        <label for="birthdate">Birthdate</label>
+        <input type="date" 
+        max="1979-12-31"
+        name="birthdate"
+        id="birthdate">
+
+        <label for="birthdaytime">Birthday (date and time):</label>
+        <input type="datetime-local" id="birthdaytime" name="birthdaytime">
+        <br>
+        <label for="countries">Country</label>
+        <select id="countries" name="countries" multiple>
+            <option value="jordan">Jordan</option>
+            <option value="egypt">Egypt</option>
+            <option value="sae">Saudi Arabia</option>
+            <option value="sae">Saudi Arabia</option>
+            <option value="sae">Saudi Arabia</option>
+            <option value="sae">Saudi Arabia</option>
+        </select>
+        <br>
+        <label for="gender">Male</label>
+        <input type="radio" name="gender" value="m">
+        <label for="gender">Female</label>
+        <input type="radio" name="gender" value="f">
+        <br>
+        <label for="c#">C#</label>
+        <input type="checkbox" id="c#" name="languages" value="c#">
+
+        <label for="javscript">Javascript</label>
+        <input type="checkbox" id="javscript" name="languages" value="javscript">
+        
+        <label for="python">Python</label>
+        <input type="checkbox" id="python" name="languages" value="python">
+        
+
+    </fieldset>
+    <fieldset>
+        <legend>Contact Inforation</legend>
+        <!--contact information-->
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" placeholder="email">
+        <br>
+        <label for="telephone">Mobile</label>
+        <input id="telephone" name="tel" type="tel" placeholder="+962-xxxxx">
+        <br>
+        <label for="description">Description</label>
+        <textarea id="description" name="description" rows="10" cols="30"></textarea>
+        <br>
+    </fieldset>
+        <!--attachments-->
+    <fieldset>
+        <legend>Attachments</legend>
+        <label for="cv">CV</label>
+        <input type="file" name="cv" id="cv">
+        <br>
+        <input type="submit" value="submit">
+    </fieldset>
+
+        <a href="pages/contact.html">Go to contact</a>
+    </form>
+</body>
+</html>
