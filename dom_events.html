@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+         div.box {
+            height:500px;
+            width:500px;
+            margin: auto;
+            padding-top:10px;
+            background-color:violet;
+        }
+        div.parent {
+            height:500px;
+            width:500px;
+            margin:  auto;
+            padding-top:10px;
+            background-color: red;
+        }
+        
+        div.child {
+            height:50%;
+            width:50%;
+            margin: auto;
+            background-color: blue;
+        }
+        div.grandchild {
+            height:50%;
+            width:50%;
+            margin: auto;
+            background-color: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="parent"> parent
+        <div class="child"> child
+            <div class="grandchild">grand child</div>
+        </div>
+    </div>
+    <div>
+
+
+    </div>
+</body>
+<script>
+    const parent = document.querySelector('div.parent');
+    const child = document.querySelector('div.child');
+    const grandchild = document.querySelector('div.grandchild');
+
+    grandchild.addEventListener('click', function(e){
+        console.log('grandchild bubble');
+        //e.stopPropagation();
+    },{once: true});
+    // grandchild.addEventListener('click', function(e){
+     
+    //     console.log('grandchild capture');
+
+    // },{capture:true});
+
+    child.addEventListener('click', function(e){
+        console.log('child bubble');
+       
+    });
+    // child.addEventListener('click', function(e){
+    //     console.log('child capture');
+    //     e.stopPropagation();
+    // }, {capture:true});
+    parent.addEventListener('click', function(e){
+        console.log('parent bubble');
+    });
+    // parent.addEventListener('click', function(e){
+    //     console.log('parent capture');
+    // }, {capture:true});
+    document.addEventListener('click', function(e){
+        console.log('root document bubble');
+    });
+    // document.addEventListener('click', function(e){
+    //     console.log('root document capture');
+       
+    // }, {capture:true});
+    
+
+</script>
+</html>
