@@ -95,7 +95,7 @@
         return items;
     }
     function getElementContainerIndex(parentContainer, element){
-        const parentArray = [...parentContainer];
+        const parentArray = Array.From(parentContainer)
         return parentArray.indexOf(element);
     }
     function fillTodoList(items, ulContainer){
@@ -130,7 +130,6 @@
         deleteBtn.innerText = 'delete';
         deleteBtn.addEventListener('click', function(e){
             //remove element from ul 
-            const parentArray = [...e.target.parentElement.parentElement.children];
             //update array
             //const index= parentArray.indexOf(e.target.parentElement);
 
