@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO Application</title>
+
+    <style>
+        ul {
+            list-style: none;
+        }
+        span.checked {
+            text-decoration: line-through;
+        }
+
+        button {
+            display: inline-block;
+            margin-left: 10px;
+        }
+        .hiddenElement {
+            display: none;
+        }
+
+        /* input:checked + span {
+            text-decoration: line-through;
+        } */
+    </style>
+</head>
+
+<body>
+    <h1>Todo Items</h1>
+    <ul id="todolist">
+        
+    </ul>
+    <form id="todoform">
+        <label for="todotext">Enter new Todo Item</label>
+        <input id="todotext" name="todotext" type="text">
+        <input id="todobtn" name="todobtn" type="submit">
+    </form>
+</body>
+<script>
+    class TodoItem {
+        constructor(title, checked){
+            this.title = title;
+            this.checked = checked;
+        }
+    }
+    const storageKey = 'todo';
+    let todoItems = [];
+    //retrieve data fron local storage
+    todoItems = getDataFromLocalStorage();
+    
+    console.log(todoItems);
+    const todoList = document.querySelector('#todolist');
+    const todoForm = document.querySelector('#todoform');
+    if(todoItems != null){
+        fillTodoList(todoItems,todoList);
+    }
+
+    todoForm.addEventListener('submit',function(e){
+        e.preventDefault();
+        //console.log(e);
+
+        //get value in todo input 
+        // const todoText = document.querySelector('#todotext');
+        // console.log(todoText.value);
+        // console.log(e);
+        const formData = new FormData(todoForm);
+        const todoText = formData.get('todotext');
+        todoItems.push(new TodoItem(todoText, false));
+        
+        fillTodoList(todoItems, todoList);
+
+        persistLocalStorage(todoItems);
+        
+        //clear input field
+        const inputField = document.querySelector('#todotext');
+        inputField.value = '';
+
+
+    });
+    function persistLocalStorage(items){
+        const itemString = JSON.stringify(items);
+        localStorage.setItem(storageKey,itemString);
+    }
+    function getDataFromLocalStorage(){
+        let items = [];
+        
+        if(localStorage.getItem(storageKey) != null){
+            items =  [...JSON.parse(localStorage.getItem(storageKey))].map((element, index)=>{
+            return new TodoItem(element.title, element.checked);
+        });
+        }
+        return items;
+    }
+    function getElementContainerIndex(parentContainer, element){
+        const parentArray = [...parentContainer];
+        return parentArray.indexOf(element);
+    }
+    function fillTodoList(items, ulContainer){
+        ulContainer.innerHTML = '';
+        items.forEach((element, index)=> {
+
+        //add list item with todo value
+        const li = document.createElement('li');
+        const liContent = document.createElement('span');
+        liContent.append(element.title);
+
+        //add checkbox to list item 
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.name = 'todocheck';
+        checkbox.id = 'todocheck';
+        checkbox.checked = element.checked;
+        liContent.className = element.checked ? 'checked': '';
+
+        checkbox.addEventListener('change', function(e){
+            e.target.nextElementSibling.classList.toggle('checked');
+
+            //update array
+            const index = getElementContainerIndex(e.target.parentElement.parentElement.children, e.target.parentElement);
+            items[index].checked = !items[index].checked;  
+
+            persistLocalStorage(items);
+
+        });
+        const deleteBtn = document.createElement('button');
+        //add delete button 
+        deleteBtn.innerText = 'delete';
+        deleteBtn.addEventListener('click', function(e){
+            //remove element from ul 
+            const parentArray = [...e.target.parentElement.parentElement.children];
+            //update array
+            //const index= parentArray.indexOf(e.target.parentElement);
+
+            const index = getElementContainerIndex(e.target.parentElement.parentElement.children, e.target.parentElement);
+            todoItems = todoItems.slice(0,index).concat(todoItems.slice(index+1));
+            e.target.parentElement.remove();
+
+            persistLocalStorage(todoItems);
+        });
+        
+        li.append(checkbox);
+        li.append(liContent); 
+        li.append(deleteBtn);
+        ulContainer.appendChild(li);
+
+        });
+     
+
+    }
+</script>
+</html>
