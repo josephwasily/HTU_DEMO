@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dom Applications</title>
+    <style>
+        .todolist {
+            list-style: none;
+        }
+        span.checked {
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+<body>
+    <h1>Todo List</h1>
+    <div class="wrapper">
+        <h2>Items</h2>
+        <ul class="todolist">
+        </ul>
+    <div>
+    <form id="todoform">
+        <label for="todo">New Todo Item:</label>
+        <input type="text" name="todo" id="todo" placeholder="add item"/>
+        <input type="submit" id="todobtn" value="add">
+    </form>
+    </div>
+
+    </div>
+</body>
+<script>
+    class TodoItem {
+        constructor(name, checked){
+            this.name = name;
+            this.checked = checked;
+        }
+    };
+ 
+  
+    const todoList = document.querySelector('.todolist');
+    const todoForm = document.querySelector('#todoform');
+    let todoItems = [];
+    retrieveElements();
+    todoForm.addEventListener('submit', function(e){
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        //create new li element 
+        const todoItem = new TodoItem(formData.get('todo'), false);
+        todoItems.push(todoItem); 
+        
+        todoList.appendChild(createTodoElement(todoItem));
+        persistElements(todoItems);
+        //push to the page
+    });
+
+    function createTodoElement(item){
+
+        //create list item
+        const li = document.createElement('li');
+        const liContent = document.createElement('span');
+        liContent.innerText = item.name;
+
+        //create checkbox
+        const checkBox = document.createElement('input');
+        checkBox.setAttribute('type', 'checkbox');
+        checkBox.setAttribute('name', 'done');
+        checkBox.setAttribute('id', 'done');
+       
+        checkBox.addEventListener('change',function(e){
+            console.log(e.target.nextSibling.classList.toggle('checked'));
+            console.log(e.target.parentElement);
+        });
+        //li.innerText = formData.get('todo');
+        li.appendChild(checkBox);
+        li.append(liContent);
+        return li;
+    }
+    function persistElements(elements){
+        localStorage.setItem('todoItems', JSON.stringify(elements));
+    }
+    function retrieveElements(){
+        todoItems = [];
+        let storedItems = localStorage.getItem('todoItems');
+        if(storedItems != null){
+            const elements = JSON.parse(storedItems);   
+        
+        elements.forEach(element => {
+            const todoItem = new TodoItem(element.name,element.checked);
+            todoItems.push(todoItem);  
+            todoList.appendChild(createTodoElement(todoItem));
+        });
+        }
+        
+
+    }
+   
+</script>
+</html>

@@ -45,7 +45,11 @@
             this.title = title;
             this.checked = checked;
         }
+        printHello(){
+            console.log(this.title);
+        }
     }
+    
     const storageKey = 'todo';
     let todoItems = [];
     //retrieve data fron local storage
@@ -59,6 +63,7 @@
     }
 
     todoForm.addEventListener('submit',function(e){
+        console.log(this);
         e.preventDefault();
         //console.log(e);
 
@@ -79,6 +84,10 @@
         inputField.value = '';
 
 
+    });
+
+    todoForm.addEventListener('submit',(e) => {
+        console.log(this);  
     });
     function persistLocalStorage(items){
         const itemString = JSON.stringify(items);

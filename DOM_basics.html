@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .newul {
+            background-color: red;
+        }
+        .events {
+            background-color: blueviolet;
+            height: 200px;
+            width: 200px;
+        }
+        .events2 {
+            background-color: blue;
+            height: 200px;
+            width: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <ul id="ul" class="ul firstul">
+        <li id="firstelement">
+            1<b style="display: none ;">hidden text</b>
+        </li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+    <ul id="ul2" class="ul secondul">
+        <li id="firstelement">
+            1<b style="display: none ;">hidden text</b>
+        </li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+    <img id='img1' src="img/library-gc39d59f3d_1920.jpg" height="100px" alt="library image" title="library image" data-customAttribute="x" data-customAttribute2="z">
+    <div class="events">
+        Events div
+    </div>
+    <div class="events events2">
+        Events div
+    </div>
+
+
+</body>
+<script>
+    console.log(document.children[0]);
+    var h1 = document.createElement('h1');
+    h1.innerText = 'Hello World';
+    
+    //console.log(h1);
+    document.body.append(h1);
+    document.body.append('Hello World 2');
+    // var ul =  document.createElement('ul');
+    // for(let i=1; i<= 3; i++){
+    //     var li = document.createElement('li');
+    //     li.innerText = i;
+    //     ul.appendChild(li);
+    // }
+    var ul = document.getElementById('ul');
+    var li = document.createElement('li');
+    li.innerText = 'new LI';
+    ul.appendChild(li);
+    
+    const eventsBox = document.querySelector('.events');
+    const eventsBox2 = document.querySelector('.events2');
+    eventsBox.addEventListener('click', clickOnBox);
+    eventsBox2.addEventListener('click',clickOnBox);
+ 
+    function clickOnBox(e){
+        console.log('you clicked on a box');
+        console.log(e.target);
+    }
+    
+
+</script>
+</html>
