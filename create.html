@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Post</title>
+</head>
+<body>
+    <form id="addPost">
+        <label for="title">Enter Post Title</label>
+        <input id="title" name="title" type="text">
+        <br>
+        <label for="body">Enter Post Body</label>
+        <textarea id="body" name="body"></textarea>
+        <br>
+        <label for="userid">Enter User Id</label>
+        <input id="userid" name="userid" type="number">
+        <br>
+        <button class="submit" type="submit">Submit</button>
+    </form>
+</body>
+<script>
+    var addForm = document.querySelector('#addPost');
+    addForm.addEventListener('submit', function(event){
+        event.preventDefault();
+        const data = new FormData(addForm);
+        const postTitle = data.get('title');
+        const postBody = data.get('body');
+        const userId = data.get('userid');
+        // create http post request 
+        const body = {
+            title: postTitle,
+            body: postBody,
+            userId: userId 
+        };
+        fetch('https://jsonplaceholder.typicode.com/posts', {
+            method: 'POST',
+            headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+            },
+            body: JSON.stringify(body) 
+        }).then((response)=> response.json())
+        .then(json => console.log(json))
+    });
+</script>
+</html>

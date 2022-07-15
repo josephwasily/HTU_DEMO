@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Preview Page</title>
+</head>
+<body>
+    <h1 class="post-title"></h1>
+    <p class="post-body"></p>
+    <ul class="comments-container"></ul>
+</body>
+<script>
+    const queryParams = new URLSearchParams(location.search);
+    const id = queryParams.get('id');
+    console.log(id);
+    const title = document.querySelector('.post-title');
+    const body = document.querySelector('.post-body');
+    //get post by id 
+    const commentsContainer = document.querySelector('.comments-container');
+    Promise.all([fetch('https://jsonplaceholder.typicode.com/posts/'+id).then((response)=> response.json()),
+    fetch('https://jsonplaceholder.typicode.com/posts/'+id+'/comments').then((response)=> response.json())
+]).then((result)=> {
+    const post = result[0];
+    const comments = result[1]; //comments
+    console.log(post);
+    console.log(comments);
+    //preview post  
+    title.innerText = post.title;
+    body.innerText = post.body;
+
+    //preview comments 
+    comments.forEach(comment => {
+        const li = document.createElement('li');
+        const commentTitle = document.createElement('span');
+        const commentAuthorEmail = document.createElement('span');
+
+        commentTitle.innerText = comment.name;
+        commentAuthorEmail.innerText = comment.email;
+        li.append(commentTitle);
+        li.append(commentAuthorEmail);
+        commentsContainer.append(li);
+    });
+
+ })
+    
+    // .then((response)=> response.json())
+    // .then(json => {
+    //     title.innerText = json.title;
+    //     body.innerText = json.body;
+    // });
+    
+    // .then((response)=> response.json())
+    // .then(json => {
+      
+    // });
+</script>
+</html>

@@ -1,0 +1,23 @@
+User Stories:
+	User can preview all posts, and click on any post card to navigate to the post preview page
+	User can add new post in create posts page
+	User can preview a post in page, along with its comments and author data
+	User can edit a post by changing values in a form and saving in preview page 
+	User can delete a post by clicking delete button on all posts page or on same page
+
+
+
+Resources: 
+- https://betterprogramming.pub/dom-manipulation-the-dangers-of-innerhtml-602f4119d905#:~:text=%27innerHTML%27%20Presents%20a%20Security%20Risk,the%20MDN%20documentation%20on%20innerHTML%20.
+- https://developer.mozilla.org/en-US/docs/Web/API/Location
+- https://www.wisdomgeek.com/development/web-development/javascript/javascript-promises-combinators-race-all-allsettled-any/
+
+
+Bonus Tasks: 
+	User story: user can search for posts that matches search text in all posts
+	User story: user can update single field (not all fields) by clicking edit button next to it
+
+
+
+	
+
