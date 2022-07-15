@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Js Async</title>
+</head>
+<body>
+    <button>test</button>
+</body>
+<script>
+//     console.log('1'); //synchronous code
+//     console.log('2');
+//     console.log('3');
+//     // for(let i=0; i<50000; i++){
+        
+//     //     console.log(i); // database / network call (http request) / file system / CPU => Async Code
+
+    setTimeout(function timeout(){
+        //console.log('callback')
+        //callback method <>
+  
+
+    }, 2000);
+ 
+            //callback from queue x=2;
+//     doWorkThenCallFunc(()=> {
+//         //write code that rely on the work 
+//     })
+//     console.log('after long running asynchronous code');
+//     console.log('after long running asynchronous code1');
+//     console.log('after long running asynchronous code2');
+//     console.log('after long running asynchronous code3');
+//     console.log('after long running asynchronous code4');
+//     console.log('after long running asynchronous code5');
+
+
+// // function doWorkThenCallFunc(callback){
+// //     //do work
+// //     callback();
+// }
+
+
+
+
+//     const request = new XMLHttpRequest();
+// request.addEventListener('readystatechange', function(){
+
+//     if(request.readyState == 4 && request.status == 200){
+            //resolve()
+//         console.log('request state is done');
+//         console.log(request.responseText);
+//     }
+//      else { reject()}
+// });
+// //request.open('GET');
+// request.send();
+
+//callback hell
+setTimeout(function(){
+    //do work
+    //do work
+    //do work
+    setTimeout(function(){
+        //do work 
+                //do work 
+
+                        //do work 
+        setTimeout(function name(params) {
+                //do work 
+        },200)
+    },300)
+},200)
+
+//promises 
+    //1. pending 
+    //2. fullfilled
+    //3. rejected 
+
+let allGood = true;
+let error = 2;
+let parseFunctionSucceed = false;
+let echoFuncSucceeded = true;
+let fetchSomeData = function(){
+    return new Promise((resolve,reject)=> {
+        console.log('fetching data');
+        //do network call to get data 
+        if(allGood){
+            setTimeout(()=> {
+                resolve({
+                message:"this is data"
+            }); 
+        }, 2000);
+        }
+       else {
+        if(error == 1){
+            reject("error:networkFailed");
+        }
+        if(error == 2){
+            reject("error:fileWrongFormat");
+        }
+        
+       }
+    });
+}
+// fetchSomeData().then((data)=> {
+//     console.log("printing fetched data", data.message);
+// }).catch((error)=> {
+//     console.log(error);
+// });
+// console.log('after fetching');
+
+//example promises chaining 
+let parseData = function(data){
+
+    return new Promise((resolve, reject)=> {
+        console.log('parsing data');
+        if(parseFunctionSucceed){
+            setTimeout(()=> {
+            resolve(`this is the message that was fetched: ${data.message}`)
+         }, 1000) 
+        }
+        else {
+            reject('error:parsefailed');
+        }
+        
+    });
+}
+let echoData = function(data){
+
+return new Promise((resolve, reject)=> {
+    console.log('echoing data');
+    if(echoFuncSucceeded){
+        setTimeout(()=> {
+        console.log(data, 'logged from echo');
+        resolve();
+     }, 1000) 
+    }
+    else {
+        reject('error:parsefailed');
+    }
+    
+});
+}
+//promises chaining 
+// fetchSomeData() //return promise
+//     .then(parseData) //return promise
+//     .then(echoData) //return promise
+//     .catch((error)=> {
+//         console.log(error);
+//     }).finally(()=> {
+//         console.log('finished promises execution');
+//     });
+
+//converting xmlhttprequest to a promise-like function
+
+
+function fetchHttpData(method,url){
+    return new Promise((resolve,reject)=> {
+
+        const request = new XMLHttpRequest();
+request.onload = function(){
+
+    if(request.readyState == 4 && request.status == 200){
+        console.log(request);
+        resolve(request.responseText);
+    }
+     else {
+        reject('error: status code is not success - '+request.status);
+      }
+};
+    request.open(method, url);
+    request.send();
+
+    });
+}
+let jsonParse = function(data){
+    return new Promise((resolve, reject)=> {
+        let parsedData = JSON.parse(data);
+        resolve(parseData);
+    });
+}
+
+// fetchHttpData('GET', "https://jsonplaceholder.typicode.com/users")
+// .then(echoData)
+// .then((data)=> {
+//     console.log('data after parsing', data);
+// })
+// .catch((error)=> {
+//     console.log('error while fetching', error);
+// });
+
+
+async function fetchDataFromFetch(){
+    
+const fetchPromise = fetch('https://jsonplaceholder.typicode.com/users');
+
+// fetchPromise.then((response)=> {
+//     console.log(response);
+// })
+try{
+const response = await fetchPromise;
+console.log(response);
+
+}catch(err){
+    console.log(err);
+}
+finally{
+    console.log('log even if error happened');
+}
+
+//code after promise finished
+
+//equivelant way in promise
+// fetchPromise.then((response)=> {
+//     console.log(response);   
+// }).catch((err)=> {
+//     console.log(err);
+// }).finally(()=> {
+//     console.log('log even if error happened');
+
+// });
+
+
+}
+fetchDataFromFetch();
+console.log('after fetch data using async and await');
+</script>
+</html>
