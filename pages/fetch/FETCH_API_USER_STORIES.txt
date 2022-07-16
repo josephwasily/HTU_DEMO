@@ -1,7 +1,7 @@
 User Stories:
-	User can preview all posts, and click on any post card to navigate to the post preview page
-	User can add new post in create posts page
-	User can preview a post in page, along with its comments and author data
+	User can preview all posts, and click on any post card to navigate to the post preview page (done)
+	User can add new post in create posts page (done)
+	User can preview a post in page, along with its comments and author data (done)
 	User can edit a post by changing values in a form and saving in preview page 
 	User can delete a post by clicking delete button on all posts page or on same page
 
