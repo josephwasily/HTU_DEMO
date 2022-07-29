@@ -214,3 +214,257 @@ let emp1 = new Employee('joseph', 30, 'eg', 'masters', ['eg', 'jo'], 12312312);
 const aPerson: Person = emp1;
 
 emp1 = user5;
+
+//###### Object Oriented Typescript
+//encapsulation 
+
+class BankAccount {
+    // private balance: number;
+    // private currency: string;
+    constructor(protected balance: number, private currency: string){
+      this.balance = balance;
+      this.currency = currency;
+    }
+    deposit(amount: number): void {
+        this.balance += amount;
+    }
+
+    checkBalance(): void {
+      console.log(this.balance + " "+ this.currency);
+    }
+    withdraw(amount: number): void {
+      if(this.balance >= amount){
+        this.balance -= amount;
+      }
+      else {
+         throw new Error('insufficient balance, cannot withdraw');
+      }
+    }
+    getBalance() : number{
+      return this.balance; 
+    }
+}
+//inheritance
+class CheckingAccount extends BankAccount {
+    monthlyFee: number = 10;
+
+    //extending bankaccount
+    chargeMonthlyFee(): void {
+       
+        this.balance -= this.monthlyFee;
+    }
+}
+const acc1 = new BankAccount(100, 'JD');
+// acc1.balance = -100;
+// acc1.balance = 1000000;
+acc1.deposit(10);
+acc1.deposit(1000); 
+acc1.checkBalance();
+//acc1.withdraw(100000);
+console.log('after withdrawing');
+
+const acc2 = new CheckingAccount(100, 'JD');
+acc2.chargeMonthlyFee();
+
+class PersonalCheckingAccount extends CheckingAccount {
+
+    withdraw(amount: number): void {
+       if(amount> 5000){
+        throw new Error('Cannot withdraw more than 5000 for personal checking accounts');
+       }
+       super.withdraw(amount); //this line will never execute if amount > 5000;
+    }
+}
+class BusinessCheckingAccount extends CheckingAccount {
+
+  withdraw(amount: number): void {
+     if(amount> 50000){
+      throw new Error('Cannot withdraw more than 50000 for business checking accounts');
+     }
+     //super.withdraw(amount); //this line will never execute if amount > 5000;
+     if(this.balance >= amount){
+      this.balance -= amount;
+    }
+    else {
+       throw new Error('insufficient balance, cannot withdraw');
+    }
+  }
+}
+
+
+//acc1.chargeMonthlFee(); //Polymorphism 
+
+const acc3 = new PersonalCheckingAccount(10000, 'JD');
+//acc3.withdraw(6000);
+acc1.withdraw(1000); //polymorphism
+// const obj1 = {
+//   x: 1
+// }
+// const obj2 = obj1;
+
+// obj1.x = 15;
+
+// console.log(obj2);
+
+// let number1  = 1;
+// let number2 = number1;
+
+// number1++;
+//const acc5: PersonalCheckingAccount = acc1; // child cannot hold instance variable from the parent 
+
+const acc6: PersonalCheckingAccount = new PersonalCheckingAccount(100, 'jd'); // parent class object can hold instance from drived/child classes objects 
+
+// acc6.chargeMonthlyFee(); //casting
+
+//abstraction 
+
+interface Quote {
+  id:    string;
+  author: string;
+  en:     string;
+
+}
+
+//abstraction 
+
+interface IQuoteApi {
+   //get one element
+  //  x: number;
+   get(id: string): Quote;
+   //get many elements  
+   getAll(): Quote[];
+   //post 
+   post(quote: Quote) : Quote;
+   //delete
+   delete(id: string): void;
+   //put 
+   put(quote: Quote): Quote;
+}
+
+
+class MockUpQuoteApi implements IQuoteApi {
+  post(quote: Quote): Quote {
+    throw new Error("Method not implemented.");
+  }
+  delete(id: string): void {
+    throw new Error("Method not implemented.");
+  }
+  put(quote: Quote): Quote {
+    throw new Error("Method not implemented.");
+  }
+
+  getAll(): Quote[] {
+    return [];
+  }
+  get(id: string): Quote {
+    //throw new Error("Method not implemented.");
+    return  {
+      id:id,
+      author: '',
+      en: ''
+    };
+  }
+  deleteAll(): void{
+
+  }
+}
+
+
+class QuoteApi implements IQuoteApi {
+  constructor(){
+  }
+  getAll(): Quote[] {
+    throw new Error("Method not implemented.");
+  }
+  post(quote: Quote): Quote {
+    throw new Error("Method not implemented.");
+  }
+  delete(id: string): void {
+    throw new Error("Method not implemented.");
+  }
+  put(quote: Quote): Quote {  
+    throw new Error("Method not implemented.");
+  }
+ get(id: string): Quote {
+   //throw new Error("Method not implemented.");
+
+   //fetch
+   return {
+     id: 'xyz',
+     author: 'joseph kadjl klsjdlkajd lj ldjlkajdlksajdlkas dlkajdlaksdj ',
+     en: 'hello'
+   };
+ }
+};
+
+const quotesApi: IQuoteApi = new MockUpQuoteApi();
+//abstraction power
+
+// const quotesApi : IQuoteApi = new SOAPApi();
+
+// previewDom(quotesApi.get('xyz'));
+// previewDom(quotesApi.get());
+
+
+// function previewDom(x: any){
+
+// }
+
+
+// interface IDatabase {
+//    openConnection(): void;
+//    executeQuery(sql: string): any;
+// }
+
+// class SqlDatabase implements IDatabase {
+//   openConnection(): void {
+//      SqlDatabase.open();
+//   }
+//   executeQuery(sql: string) {
+//     SqlDatabase.execut();
+//   }
+
+// }
+
+// class MySqlDatabase implements IDatabase {
+//   openConnection(): void {
+//      MSqlDatabase.open();
+//   }
+//   executeQuery(sql: string) {
+//     SqlDatabase.execut();
+//   }
+
+// }
+
+//object oriented way
+// let dbContext : IDatabase;
+// if(cloud == 'azure'){
+//     dbContext = SqlDatabase();
+// }
+// else if(cloud == 'amazon'){
+//   dbContext = MySqlDatabase();
+// }
+
+
+
+
+// function getDataFromDb(){
+//   dbContext.executeQuery();
+// }
+
+// function anotherGetDataFromDb(){
+//   dbContext.executeQuery();
+// }
+
+
+// //functional way 
+// function connectToDb(type: string ){
+//   if(type == 'SQL')
+//   if(type == "MYSQL")
+// }
+
+// connectToDb('SQL');
+
+import * as _ from 'lodash'
+
+console.log(_.ceil(1.6));
