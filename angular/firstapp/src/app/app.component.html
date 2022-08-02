@@ -15,11 +15,32 @@
 
   </div>
   <div class="generate-container">
-    <input type="number" name="generate" id="generate">
-    <button>generate</button>
-  </div>  
+    <input #generateTeamsInput type="number" name="generate" id="generate"
+    (input)="onTeamsNumbersInput(generateTeamsInput.value)">
+    <button (click)="generateTeams()">generate</button>
+  </div>    
 </div>
+
 
 <p class="error" *ngIf="errorMessage"> 
   {{errorMessage}}
 </p>
+
+
+<!-- show the content of the generated teams-->
+
+<div class="teams-container">
+    <div class="teams-card">
+      <h2>Team 1</h2>
+        <ul>
+          <li>Joseph</li>
+        </ul>
+    </div>
+    <div class="teams-card">
+      <h2>Team 2</h2>
+      <ul>
+        
+        <li>Ahmad</li>
+      </ul>
+  </div>
+</div>
