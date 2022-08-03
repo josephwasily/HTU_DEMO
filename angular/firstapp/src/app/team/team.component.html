@@ -1,0 +1,10 @@
+ 
+    <div class="teams-card">
+        <h1>Team {{index+1}} </h1>
+        <ul>
+            <li *ngFor="let memberName of members">{{memberName | uppercase | lowercase}} <button (click)="membersRemoved()">Remove Member</button>
+            
+            </li>
+
+        </ul>
+      </div>

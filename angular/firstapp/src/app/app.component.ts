@@ -2,7 +2,7 @@ import { ThisReceiver } from '@angular/compiler';
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-root', 
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
@@ -12,10 +12,11 @@ export class AppComponent {
   teamMembers: string[] = [];
   newVariable : string = 'Hello from Typecript variable';
   errorMessage: string = '';
-  noOfTeams: number = 0;
-  teams: string[][] = [];
+  noOfTeams: number | string = 0;
+  generatedTeams: string[][] = [];
   constructor(){
     console.log('hello from component constructor');
+    console.log(this.generatedTeams);
     
   }
   addMember(){
@@ -26,6 +27,7 @@ export class AppComponent {
     }
     this.teamMembers.push(this.memberName);
     console.log(this.teamMembers);
+    this.memberName = '';
   }
   onInput(member : string){
     //console.log('writing '+member);
@@ -38,29 +40,37 @@ export class AppComponent {
   changeInput(){
     this.memberName = 'joseph';
   }
-  onTeamsNumbersInput(noOfTeamsInput: string){
-    this.noOfTeams = Number(noOfTeamsInput);
-  }
   generateTeams(){
-    this.teams = [];
-    const allMembers: string[] = [...this.teamMembers];
-    while(allMembers.length != 0){
-      for(let i=0; i< this.noOfTeams; i++){
-        const randomIndex =  Math.floor(Math.random() * this.noOfTeams);
-        //get random member from copied array 
-        const member = allMembers.splice(randomIndex,1)[0];
-        if(this.teams[i]){
-            this.teams[i].push(member); //second and more member in teams
+      //no of teams 
+      //array of teams 
+    const allMembers = [...this.teamMembers];
+    this.generatedTeams = [];
+    while(allMembers.length){
+      for(let i=0; i<this.noOfTeams; i++){
+        console.log(i);
+        const randomIndex = Math.floor(Math.random() * Number(this.noOfTeams)); 
+        const member = allMembers.splice(randomIndex, 1)[0];
+        //console.log(member);
+        if(this.generatedTeams[i] ){
+            this.generatedTeams[i].push(member);
         }
         else {
-          this.teams[i] = [member]; // first member in each team
+          this.generatedTeams[i] = [member];
         }
-       
       }
+      console.log(this.generatedTeams);
     }
+
     this.teamMembers = [];
     this.noOfTeams = 0;
-    console.log(this.teams);
-    
+
+  }
+  onTeamsNumberInput(noOfTeams: number | string){
+    this.noOfTeams = Number(noOfTeams);
+    console.log(this.noOfTeams);
+  }
+  memberRemoved(event: any){
+    console.log('event capture from child component inside parent component');
+    console.log(event);
   }
 }

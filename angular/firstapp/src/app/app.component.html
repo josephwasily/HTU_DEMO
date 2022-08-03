@@ -7,16 +7,14 @@
   </ul>
   <div class="add-container">
     <input #addMemberInput [class.focus]="memberName"
-    [value]="memberName"
-    (input)="onInput(addMemberInput.value)" type="text" name="add">
+    (input)="onInput(addMemberInput.value)" type="text" [value]="memberName" name="add">
     <button (click)="addMember()">Add</button>
     <button (click)="clear()">Clear</button>
     <button (click)="changeInput()">change input field</button>
 
   </div>
   <div class="generate-container">
-    <input #generateTeamsInput type="number" name="generate" id="generate"
-    (input)="onTeamsNumbersInput(generateTeamsInput.value)">
+    <input #generateTeamsInput (input)="onTeamsNumberInput(generateTeamsInput.value)" type="number" name="generate" id="generate">
     <button (click)="generateTeams()">generate</button>
   </div>    
 </div>
@@ -26,21 +24,7 @@
   {{errorMessage}}
 </p>
 
-
-<!-- show the content of the generated teams-->
-
-<div class="teams-container">
-    <div class="teams-card">
-      <h2>Team 1</h2>
-        <ul>
-          <li>Joseph</li>
-        </ul>
-    </div>
-    <div class="teams-card">
-      <h2>Team 2</h2>
-      <ul>
-        
-        <li>Ahmad</li>
-      </ul>
-  </div>
+<div class="teams-container" *ngIf="generatedTeams">
+  <app-team [members]="team" (memberRemovedEvents)="memberRemoved($event)" [index]="i" *ngFor="let team of generatedTeams; let i= index;"></app-team>
 </div>
+
