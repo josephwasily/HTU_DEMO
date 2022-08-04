@@ -1,0 +1,24 @@
+<label for="search" >Search the Todoso </label>
+<input type="text" name="search" #searchInput (input)="onSearchInput(searchInput.value)">
+
+<ul *ngIf="todos.length > 0">
+  <li *ngFor="let todo of todosPreview;let i = index;">
+    <input type="checkbox" name="todoDone"
+   (change)="checkboxChange()"
+    [(ngModel)]="todo.isDone">
+    <span [class.todo-done]="todo.isDone">{{ todo.title }}</span>
+    <button (click)="deleteTodo(i)"> Delete </button>
+  </li>
+</ul>
+
+
+
+<br>
+<label for="newTodo">Add Todo : </label>
+<input type="text" name="newTodo"
+
+[(ngModel)]="newTodo"
+>
+<button [disabled]="!newTodo" (click)="addNewTodo()">Add</button>
+<br>
+<button (click)="deleteAllTodos()">Delete All Todos</button>
