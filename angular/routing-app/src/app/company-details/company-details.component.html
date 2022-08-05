@@ -1,0 +1,13 @@
+<div *ngIf="company">
+<h2>Company Name</h2>
+<p>{{company.name}}</p>
+<h2>Company Founder</h2>
+<p>{{company.founderName}}</p>
+
+<div *ngIf="show == 'true'">
+<h2>Company Number Of Employees</h2>
+<p>{{company.numberOfEmployees}}</p>
+</div>
+<h2>Company Description</h2>
+<p>{{company.description | lowercase}}</p>
+</div>
