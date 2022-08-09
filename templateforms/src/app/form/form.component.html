@@ -3,7 +3,7 @@
 	<fieldset>
 	<legend>Your Info</legend>
 	<label for="name">Your Name: </label>
-	<input type="text" id="name" name="name" placeholder="Your Last Name only" #fname="ngModel" ngModel required>
+	<input type="text" id="name" name="name" placeholder="Your Last Name only" #fname="ngModel" [(ngModel)]="catForm.name" required>
 	<div class="error" *ngIf="fname.invalid && fname.touched">
 		<small>Name is required</small>
 	</div>
@@ -11,22 +11,26 @@
 	</fieldset>
 	<br>
 
-	<fieldset>
+	<fieldset ngModelGroup="catsInfo">
 	<legend>Your Cats Info</legend>
 		<label for="catsName">Your Cat's Name: </label>
-		<input type="text" id="catsName" name="catsName" placeholder="Ex: Puuchee" required ngModel>
+		<input type="text" id="catsName" name="catsName" placeholder="Ex: Puuchee" required [(ngModel)]="catForm.catsInfo.catsName">
 		<br>
 		<br>
 		<label for="catsEmailAddress">Your Cat's Email Address: </label>
-		<input type="email" id="catsEmail" name="catsEmail" placeholder="Ex: cat@cats.com" required email ngModel>
+		<input type="email" id="catsEmail" name="catsEmail" placeholder="Ex: cat@cats.com" required email [(ngModel)]="catForm.catsInfo.catsEmail">
 		<br>
 
 
 		<p>What's your cat's favorite food?</p>
-		<label><input type="checkbox" name="favoriteFood" value="milk" ngModel>Milk</label>
+		<label *ngFor="let food of catFood">
+			<input (change)="changeCheckbox()" type="checkbox" name="{{food.name}}" [(ngModel)]="food.checked">
+			{{food.name}}
+		</label>
+		<!-- <label><input type="checkbox" name="favoriteFood" value="milk" ngModel>Milk</label>
 		<label><input type="checkbox" name="favoriteFood" value="milk" ngModel>Biscuits</label>
 		<label><input type="checkbox" name="favoriteFood" value="milk" ngModel>Banana</label>
-		<label><input type="checkbox" name="favoriteFood" value="milk" ngModel>Cucumber</label>
+		<label><input type="checkbox" name="favoriteFood" value="milk" ngModel>Cucumber</label> -->
 		<br>
 
 		<label for="selfie">How often do your cat shares his/her selfie on Facebook?</label>
@@ -61,6 +65,7 @@
   <br />
 
 	<button type="submit" >Submit</button>
+	<button (click)="fillForm($event,myForm)">Fill Form</button>
 </form>	
 <div class="error" *ngIf="myForm.invalid">
 	<!-- <div *ngFor="let control  (myForm.controls)">
@@ -68,8 +73,12 @@
 	</div> -->
 </div>
 <br /> <br /> <br />
+<div>
+	{{myForm.value | json}}
+</div>
+
 <!-- <div *ngFor="let cat of submittedForms ">
 		{{cat | json}}
 </div> -->
-
-<app-child-component></app-child-component>
+<!-- 
+<app-child-component></app-child-component> -->
