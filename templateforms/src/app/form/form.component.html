@@ -1,0 +1,75 @@
+<form (ngSubmit)="onSubmit(myForm)" #myForm="ngForm" > <!-- We dont have any page to process our data, and hence we leave the action attribute empty. -->
+
+	<fieldset>
+	<legend>Your Info</legend>
+	<label for="name">Your Name: </label>
+	<input type="text" id="name" name="name" placeholder="Your Last Name only" #fname="ngModel" ngModel required>
+	<div class="error" *ngIf="fname.invalid && fname.touched">
+		<small>Name is required</small>
+	</div>
+  <!--Try submitting the form without filling out this field -->
+	</fieldset>
+	<br>
+
+	<fieldset>
+	<legend>Your Cats Info</legend>
+		<label for="catsName">Your Cat's Name: </label>
+		<input type="text" id="catsName" name="catsName" placeholder="Ex: Puuchee" required ngModel>
+		<br>
+		<br>
+		<label for="catsEmailAddress">Your Cat's Email Address: </label>
+		<input type="email" id="catsEmail" name="catsEmail" placeholder="Ex: cat@cats.com" required email ngModel>
+		<br>
+
+
+		<p>What's your cat's favorite food?</p>
+		<label><input type="checkbox" name="favoriteFood" value="milk" ngModel>Milk</label>
+		<label><input type="checkbox" name="favoriteFood" value="milk" ngModel>Biscuits</label>
+		<label><input type="checkbox" name="favoriteFood" value="milk" ngModel>Banana</label>
+		<label><input type="checkbox" name="favoriteFood" value="milk" ngModel>Cucumber</label>
+		<br>
+
+		<label for="selfie">How often do your cat shares his/her selfie on Facebook?</label>
+		<select ngModel name="selfie" id="selfie">
+			<option value="hourly">Every Hour</option>
+			<option value="daily">Every Day</option>
+			<option value="weekly">Every Week</option>
+			<option value="monthly">Every Month</option>
+		</select>
+	</fieldset>
+	<br><br>
+
+	<fieldset>
+	<legend>Your Cat's BFF's Info</legend>
+		<label for="catsBffName">Your cat's BFF's Name: </label>
+		<input type="text" id="catsBffName" name="catsBffName" ngModel>
+
+		<p>Gender of your Cat's BFF: </p>
+		<label><input type="radio" name="bffGender" ngModel value="male"> Male</label>
+		<label><input ngModel type="radio" name="bffGender" value="female">Female</label>
+		
+	</fieldset>
+	<br>
+  
+  <fieldset>
+    <legend>Story</legend>
+    <label for="story">Tell us the story how your cat met his/her BFF:
+      <textarea ngModel name="story" id="story" cols="30" rows="10">Write your story here...</textarea>
+      <!--cols and rows attributes determines how big the input field will be by default -->
+    </label>
+  </fieldset>
+  <br />
+
+	<button type="submit" >Submit</button>
+</form>	
+<div class="error" *ngIf="myForm.invalid">
+	<!-- <div *ngFor="let control  (myForm.controls)">
+		{{control.errors}}
+	</div> -->
+</div>
+<br /> <br /> <br />
+<!-- <div *ngFor="let cat of submittedForms ">
+		{{cat | json}}
+</div> -->
+
+<app-child-component></app-child-component>
