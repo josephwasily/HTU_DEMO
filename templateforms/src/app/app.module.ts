@@ -7,13 +7,15 @@ import { AppComponent } from './app.component';
 import { CatspreviewComponent } from './catspreview/catspreview.component';
 import { FormComponent } from './form/form.component';
 import { ChildComponentComponent } from './child-component/child-component.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CatspreviewComponent,
     FormComponent,
-    ChildComponentComponent
+    ChildComponentComponent,
+    LandingPageComponent
   ],
   imports: [
     BrowserModule,

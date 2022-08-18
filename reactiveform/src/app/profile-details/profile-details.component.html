@@ -1,0 +1,40 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" >
+    <div>
+        <label for="firstName">First</label>
+        <input formControlName="firstName"  type="text">
+    </div>
+    <div>
+        <label for="lastName">Last Name</label>
+        <input  formControlName="lastName" type="text">
+        <small *ngIf="form.controls.lastName.touched && form.controls.lastName.invalid" >The Input is invalid</small>
+    </div>
+    <div>
+    </div>
+<div formGroupName="address">        
+    <div>
+        <label for="city">City</label>
+        <input formControlName="city" type="text">
+    </div>
+    <div>
+        <label for="state">State</label>
+        <input formControlName="state" type="text">
+    </div>
+</div>
+   <button type="submit">Submit</button>
+   <button (click)="setValue()">Set Value</button>
+   <button (click)="patchValue()">Patch Value</button>
+</form>
+
+<!-- <div>
+    {{form.value | json}}
+</div> -->
+
+<!-- 
+<div *ngFor="let element of statusChanges">
+        {{element | json}}
+</div>
+
+
+<div *ngFor="let element of valueChanges">
+    {{element | json}}
+</div> -->

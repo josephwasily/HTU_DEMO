@@ -1,0 +1,11 @@
+table {
+    width:100%
+}
+
+.mat-column-names {
+    font-weight: bold;
+    font-style: italic;
+}
+.mat-column-author {
+    text-decoration: line-through;
+}
