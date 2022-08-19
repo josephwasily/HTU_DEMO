@@ -1,3 +1,6 @@
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { environment } from './../environments/environment';
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -25,7 +28,9 @@ import {MatIconModule} from '@angular/material/icon';
     MatTableModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    provideFirebaseApp(()=> initializeApp(environment.firebase)),
+    provideFirestore(()=> getFirestore())
   ],
   providers: [],
   bootstrap: [AppComponent]

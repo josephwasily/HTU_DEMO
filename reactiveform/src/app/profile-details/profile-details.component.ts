@@ -2,6 +2,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Profile, ProfileService } from './../profile.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormControlStatus, FormGroup, NgForm, Validators } from '@angular/forms';
+import { map, take } from 'rxjs';
 
 @Component({
   selector: 'app-profile-details',
@@ -16,7 +17,7 @@ export class ProfileDetailsComponent implements OnInit {
     ) { }
   statusChanges: FormControlStatus [] = [];
   valueChanges: any [] = [];
-  id?: number;
+  id?: string;
   // form = new FormGroup({
   //   firstName: new FormControl('', [Validators.required,Validators.email]),
   //   lastName: new FormControl('botros'),
@@ -25,6 +26,7 @@ export class ProfileDetailsComponent implements OnInit {
   //       state: new FormControl('jordan')
   //   })
   // });
+  // email = this.fb.control('joseph', Validators.required);
   form = this.fb.group({
        firstName: this.fb.control('',[Validators.required,Validators.email]),
     lastName: this.fb.control('', Validators.required),
@@ -37,18 +39,25 @@ export class ProfileDetailsComponent implements OnInit {
 
     const idFromRoute = this.route.snapshot.paramMap.get('id');
     if(idFromRoute){
-      this.id = Number(idFromRoute);  
+      this.id = idFromRoute;
 
       //prepopulation profile data in form 
-      let profile = this.profileService.getProfile(this.id);
-      this.form.setValue({
-        firstName : profile.firstName,
-        lastName : profile.lastName,
-        address : {
-          city : profile.address.city,
-          state : profile.address.state
-        }
-      }); 
+      //let profile = this.profileService.getProfile(this.id);
+      this.profileService.get(this.id).pipe(
+        take(1),
+        map(value=> value as Profile)
+      ).subscribe((profile)=> {
+        this.form.setValue({
+          firstName : profile.firstName,
+          lastName : profile.lastName,
+          address : {
+            city : profile.address.city,
+            state : profile.address.state
+          }
+        }); 
+      })
+     
+      
     }
     // this.form.statusChanges.subscribe((data)=> {
     //     this.statusChanges.push(data);
@@ -79,21 +88,30 @@ export class ProfileDetailsComponent implements OnInit {
   onSubmit(){
     console.log(this.form);
     console.log(this.form.value);
-    if(this.id != null){
+    let profile = this.form.value as Profile;
+
+    if(this.id != null && this.id != ""){
       //update
-      let profile = this.form.value as Profile;
       profile.id = this.id;
-      this.profileService.updateProfile(profile);
+      //this.profileService.updateProfile(profile);
+      this.profileService.update(profile).then(()=> {
+        this.navigateToList();
+      });
     }
     else {
-      this.profileService.addProfile(this.form.value as Profile);
+      //this.profileService.addProfile(this.form.value as Profile);
+      this.profileService.create(profile).then(()=> {
+        this.navigateToList();
+      })
     }
     //save data in service
  
-    //navigate to profile lists page 
-    this.router.navigate(['/profile']);
-  
+    //navigate to profile lists page
   }
+  navigateToList(){
+    this.router.navigate(['/profile']);
+  }
+
 
  
 }
