@@ -1,0 +1,19 @@
+<mat-toolbar color="primary">
+  Company
+
+  <button mat-raised-button (click)="logout()" *ngIf="authService.userState$ | async; else loginButton">
+    Logout
+    <mat-icon>logout</mat-icon>
+</button>
+<ng-template #loginButton>
+<button mat-raised-button (click)="login()">
+  Login
+  <mat-icon>login</mat-icon>
+</button>
+</ng-template>
+</mat-toolbar>
+<div class="content">
+
+  <router-outlet></router-outlet>
+
+</div>
