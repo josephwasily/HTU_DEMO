@@ -1,2 +1,35 @@
-<p>register works!</p>
-    
+<h1>Register</h1>
+<div class="form-container">
+    <mat-radio-group aria-label="Select an option" [formControl]="formType">
+        <mat-radio-button value="company">Company</mat-radio-button>
+        <mat-radio-button value="user">User</mat-radio-button>
+      </mat-radio-group>
+<form [formGroup]="registerForm" (ngSubmit)="submit()">
+    <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput type="text" formControlName="email">
+        <mat-error *ngIf="email?.errors?.['required']">Email is required</mat-error>
+        <mat-error *ngIf="email?.errors?.['email']">Email format is incorrect</mat-error>
+        <mat-error *ngIf="email?.errors?.['nonCorporateEmail']">Email should be a corporate email and not personal email</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password">
+        <mat-error *ngIf="password?.errors?.['required']">Password is required</mat-error>
+        <mat-error *ngIf="password?.errors?.['minlength']">Password must be at least 8 characters</mat-error>
+    </mat-form-field>   
+    <mat-form-field>
+        <mat-label>Confirm Password</mat-label>
+        <input matInput type="password" formControlName="confirmPassword">
+        <mat-error *ngIf="confirmPassword?.errors?.['required']">Password is required</mat-error>
+        <!-- <mat-error *ngIf="confirmPassword?.errors?.['minlength']">Password must be at least 8 characters</mat-error> -->
+    </mat-form-field>   
+    <!-- <mat-error *ngIf="formStatus">
+            {{formStatus}}
+    </mat-error> -->
+    <mat-error *ngIf="registerForm.errors?.['passwordDontMatch']">
+           Confirm password don't match the entered password
+    </mat-error>
+    <button type="submit" mat-raised-button color="primary" [disabled]="!registerForm.valid">Register</button>    
+</form>
+</div>

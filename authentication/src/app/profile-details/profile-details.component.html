@@ -1,0 +1,24 @@
+<h1>Profile Details</h1>
+
+<div class="form-container" *ngIf="authService.userState$ | async as user">
+    <div class="profile-image">
+    <img
+        [src]="user.photoURL ?? '/assets/profile-placeholder.jpg' "
+        width="240"
+        height="240"
+    >
+    <button mat-mini-fab (click)="inputFile.click()"><mat-icon>edit</mat-icon></button>
+    <input type="file" #inputFile accept="image/*" hidden value="select image" (change)="submit($event)">
+</div>
+    <form [formGroup]="profileDetailsForm" (ngSubmit)="saveForm()">
+        <mat-form-field>
+            <mat-label>Full Name</mat-label>
+            <input matInput type="text" formControlName="fullName">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Age</mat-label>
+            <input matInput type="number" formControlName="age">
+        </mat-form-field>
+        <button type="submit" mat-raised-button>Save Profile</button>
+    </form>
+</div>

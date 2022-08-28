@@ -16,7 +16,16 @@ import { HomeComponent } from './home/home.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { environment } from '../environments/environment';
+import { HotToastModule } from '@ngneat/hot-toast';
+import { ProfileDetailsComponent } from './profile-details/profile-details.component';
+import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { UserLayoutComponent } from './user-layout/user-layout.component';
+import { CompanyHomeComponent } from './company-home/company-home.component';
+import { CompanyLayoutComponent } from './company-layout/company-layout.component';
+import {MatRadioModule} from '@angular/material/radio';
+import { NotAuthorizedComponent } from './not-authorized/not-authorized.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +33,12 @@ import { environment } from '../environments/environment';
     LoginComponent,
     RegisterComponent,
     LandingPageComponent,
-    HomeComponent
+    HomeComponent,
+    ProfileDetailsComponent,
+    UserLayoutComponent,
+    CompanyHomeComponent,
+    CompanyLayoutComponent,
+    NotAuthorizedComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +51,11 @@ import { environment } from '../environments/environment';
     MatInputModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+    AngularFireStorageModule,
+    HotToastModule.forRoot(),
+    MatRadioModule
   ],
   providers: [],
   bootstrap: [AppComponent]

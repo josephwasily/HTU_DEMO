@@ -1,2 +1,2 @@
 <p>home works!</p>
-<p *ngIf="authService.userState$ | async as user">Welcome {{user.email}}</p>
+<p *ngIf="profileService.userState$ | async as user">Welcome {{user.fullName}}</p>
