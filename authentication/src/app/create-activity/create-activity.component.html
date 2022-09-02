@@ -1,0 +1,26 @@
+<h2>Create Activity</h2>
+<div class="form-container">
+    <form [formGroup]="form" (ngSubmit)="submit()">
+        <mat-form-field>
+            <input matInput type="text" formControlName="name">
+            <mat-label>Name</mat-label>
+        </mat-form-field>
+        <mat-form-field>
+            <textarea matInput formControlName="description">
+            </textarea>
+            <mat-label>Description</mat-label>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input formGroupName="range" [rangePicker]="picker">
+              <input matStartDate formControlName="start" placeholder="Start date">
+              <input matEndDate formControlName="end" placeholder="End date">
+            </mat-date-range-input>
+            <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+        
+          </mat-form-field>
+          <button mat-raised-button type="submit">Submit</button>
+    </form>
+</div>

@@ -1,3 +1,5 @@
+import { ActivitiesListComponent } from './activities-list/activities-list.component';
+import { CreateActivityComponent } from './create-activity/create-activity.component';
 import { NotAuthorizedComponent } from './not-authorized/not-authorized.component';
 import { CompanyGuard } from './company.guard';
 import { UserGuard } from './user.guard';
@@ -24,11 +26,14 @@ const routes: Routes = [
 {path:'profile', component:ProfileDetailsComponent, canActivate: [AuthGuard]},
 {path:'user', component: UserLayoutComponent, canActivate: [UserGuard],
 children: [
-  {path: '', component: HomeComponent} ]
+  {path: '', component: HomeComponent, pathMatch: 'full'} ]
 },
 {path:'company', component:CompanyLayoutComponent, canActivate: [CompanyGuard],
  children: [
-  {path: '', component: CompanyHomeComponent} ]
+  {path: '', component: CompanyHomeComponent, pathMatch: 'full'} ,
+  {path: 'create-activity', component: CreateActivityComponent},
+  {path: 'activities', component: ActivitiesListComponent} 
+]
 }
 ];
 

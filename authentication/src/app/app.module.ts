@@ -26,6 +26,10 @@ import { CompanyHomeComponent } from './company-home/company-home.component';
 import { CompanyLayoutComponent } from './company-layout/company-layout.component';
 import {MatRadioModule} from '@angular/material/radio';
 import { NotAuthorizedComponent } from './not-authorized/not-authorized.component';
+import { CreateActivityComponent } from './create-activity/create-activity.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { ActivitiesListComponent } from './activities-list/activities-list.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +42,9 @@ import { NotAuthorizedComponent } from './not-authorized/not-authorized.componen
     UserLayoutComponent,
     CompanyHomeComponent,
     CompanyLayoutComponent,
-    NotAuthorizedComponent
+    NotAuthorizedComponent,
+    CreateActivityComponent,
+    ActivitiesListComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +61,9 @@ import { NotAuthorizedComponent } from './not-authorized/not-authorized.componen
     AngularFirestoreModule,
     AngularFireStorageModule,
     HotToastModule.forRoot(),
-    MatRadioModule
+    MatRadioModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [],
   bootstrap: [AppComponent]
