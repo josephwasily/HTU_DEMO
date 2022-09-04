@@ -48,7 +48,7 @@ export class ActivitiesService {
   }
 
   getCompanyActivites(companyId: string){
-    return this.firestore.collection<Activity>('activities', ref=> ref.where("companyId", '==', companyId)).valueChanges();
+    return this.firestore.collection<Activity>('activities', ref=> ref.where("companyId", '==', companyId)).valueChanges({'idField':'id'});
   }
   create(activity: Activity){
     //  return addDoc(this.profilesCollection,profile);
