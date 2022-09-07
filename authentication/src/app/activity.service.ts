@@ -48,7 +48,7 @@ export class ActivitiesService {
   }
 
   getCompanyActivites(companyId: string){
-    return this.firestore.collection<Activity>('activities', ref=> ref.where("companyId", '==', companyId)).valueChanges({'idField':'id'});
+    return this.firestore.collection<Activity>('activities', ref=> ref.where("companyId", '==', companyId)).valueChanges({'idField':'id'}); 
   }
   create(activity: Activity){
     //  return addDoc(this.profilesCollection,profile);
@@ -58,9 +58,21 @@ export class ActivitiesService {
   update(activity: Activity){
     // const docReference = doc(this.firestore, 'profiles/'+profile.id);
     // return updateDoc(docReference, {...profile});
-    return from(this.activitiesCollection.doc().update({...activity}));
+    return from(this.activitiesCollection.doc(activity.id).update({...activity}));
   }
 
+  addApplicant(activityId: string){
+    this.activitiesCollection.doc(activityId).collection('applicants').add({
+      applicantId: 'asdasdad',
+      approved: false
+    });
+  }
+  getApplicant(activityId: string){
+    return this.firestore.collection<Activity>('activities').doc(activityId).collection<ActivityApplicant>('applicants').valueChanges();
+  }
+  approveApplicant(activityApplicant: ActivityApplicant){
+    return from(this.activitiesCollection.doc(activityApplicant.activityId).collection('applicants').doc(activityApplicant.id).update(activityApplicant));
+  }
   delete(id: string){
     // const docReference = doc(this.firestore, 'profiles/'+id);
     // return deleteDoc(docReference);
@@ -79,3 +91,12 @@ export interface Activity {
   },
   companyId: string
 }
+
+export interface ActivityApplicant {
+  id?: string,
+  applicantUserId: string,
+  activityId: string, 
+  applicantName: string, 
+  applicantImageUrl: string,
+  approved: boolean
+};
