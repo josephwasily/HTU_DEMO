@@ -1,3 +1,4 @@
+import { TestComponent } from './test/test.component';
 import { ActivitiesListComponent } from './activities-list/activities-list.component';
 import { CreateActivityComponent } from './create-activity/create-activity.component';
 import { NotAuthorizedComponent } from './not-authorized/not-authorized.component';
@@ -21,6 +22,7 @@ const routes: Routes = [
 {path:'login', component:LoginComponent},
 {path:'register', component:RegisterComponent, canActivate:[NotloggedGuard]},
 {path:'not-authorized', component:NotAuthorizedComponent},
+{path: 'test', component: TestComponent},
 
 {path:'home', component:HomeComponent, canActivate: [AuthGuard]},
 {path:'profile', component:ProfileDetailsComponent, canActivate: [AuthGuard]},

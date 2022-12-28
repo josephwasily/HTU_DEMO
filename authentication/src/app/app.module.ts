@@ -30,6 +30,7 @@ import { CreateActivityComponent } from './create-activity/create-activity.compo
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ActivitiesListComponent } from './activities-list/activities-list.component';
+import { TestComponent } from './test/test.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { ActivitiesListComponent } from './activities-list/activities-list.compo
     CompanyLayoutComponent,
     NotAuthorizedComponent,
     CreateActivityComponent,
-    ActivitiesListComponent
+    ActivitiesListComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,
